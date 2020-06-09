@@ -77,3 +77,54 @@ fragment PetDetails on Pet {
   }
 }
 ```
+
+
+### Exercise
+
+Snowtooth Lab: https://snowtooth.moonhighway.com/
+1. Write a query to get allLifts with name, elevation gain and status.
+```
+query {
+  allLifts {
+    name
+    elevationGain
+    status
+  }
+}
+```
+
+2. Extend the query to find the trails off of each of those lifts.
+```
+query {
+  allLifts {
+    name
+    elevationGain
+    status
+    trailAccess {
+      id
+      name
+      status
+    }
+  }
+}
+```
+
+3. Change the status of one lift
+```
+mutation {
+  setTrailStatus(id: "blue-bird" status: CLOSED) {
+    id
+    name
+    status
+  }
+}
+```
+
+
+
+
+
+
+
+
+
