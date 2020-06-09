@@ -7,6 +7,8 @@ GraphQL Server: https://pet-library.moonhighway.com/
 
 Code: https://github.com/MoonHighway/pet-library
 
+GraphQL Schema Language Cheat Sheet: https://raw.githubusercontent.com/sogko/graphql-shorthand-notation-cheat-sheet/master/graphql-shorthand-notation-cheat-sheet.png
+
 #### Get Pets with Alias (available, checkedout)
 ```
 query {
@@ -133,3 +135,65 @@ Float
 String
 Boolean
 ID
+
+
+## GraphQL scripts
+```
+query {
+  allLifts {
+    id
+    name
+    url
+    time
+    trails
+    trailsAccess {
+      id
+      name
+    }
+  }
+  liftCount
+  findLiftById(id: "astra-express") {
+    id
+    name
+  }
+}
+```
+
+```
+query {
+  allTrails {
+    id
+    difficulty
+    lift
+    status
+  }
+}
+```
+
+```
+query {
+  findTrailById(id: "old-witch") {
+    id
+    difficulty
+    status
+    lift
+  }
+}
+```
+
+```
+query {
+  openTrailCount: trailCount(status: OPEN)
+  closedTrailCount: trailCount(status: CLOSED)
+  allTrailCount: trailCount
+}
+```
+
+```
+mutation {
+  setLiftStatus(id: "panorama", status: HOLD) {
+    name
+    status
+  }
+}
+```

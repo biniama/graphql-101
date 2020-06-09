@@ -11,9 +11,16 @@ const typeDefs = gql`
         night: Boolean!
         elevationGain: Int!
         time: String
-        url: String!
         trails: [String!]!
+        status: LiftStatus!
+        url: String!
         trailsAccess: [Trail!]!
+    }
+
+    enum LiftStatus {
+        OPEN
+        CLOSED
+        HOLD
     }
 
     enum TrailStatus {
@@ -41,6 +48,10 @@ const typeDefs = gql`
         findTrailById(id: ID!): Trail!
         trailCount(status: TrailStatus): Int!
     }
+
+    type Mutation {
+        setLiftStatus(id: ID! status: LiftStatus!): Lift!
+    }
 `
 
 const resolvers = {
@@ -62,7 +73,14 @@ const resolvers = {
         // Custom implementation of url
         url: parent => `/lift/${parent.id}.html`,
         trailsAccess: parent => parent.trails.map(trailId => trails.find(trail => trail.id === trailId))
-    }
+    },
+    Mutation: {
+        setLiftStatus: (parent, { id, status }) => {
+            let updatedLift = lifts.find(lift => lift.id === id)
+            updatedLift.status = status
+            return updatedLift;
+        }
+    },
 }
 
 const server = new ApolloServer({ typeDefs, resolvers });
