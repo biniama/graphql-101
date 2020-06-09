@@ -10,6 +10,10 @@ const typeDefs = gql`
         capacity: Int!
         night: Boolean!
         elevationGain: Int!
+        time: String
+        url: String!
+        trails: [String!]!
+        trailsAccess: [Trail!]!
     }
 
     enum TrailStatus {
@@ -53,6 +57,11 @@ const resolvers = {
             !args.status
                 ? trails.length
                 : trails.filter(trail => args.status === trail.status).length,
+    },
+    Lift: {
+        // Custom implementation of url
+        url: parent => `/lift/${parent.id}.html`,
+        trailsAccess: parent => parent.trails.map(trailId => trails.find(trail => trail.id === trailId))
     }
 }
 
