@@ -1,6 +1,8 @@
 # Graphql-101
 GraphQL Notes
 
+All Resources can be found here: https://github.com/MoonHighway/oreilly-graphql
+
 GraphQL Server: https://pet-library.moonhighway.com/
 
 Code: https://github.com/MoonHighway/pet-library
@@ -109,7 +111,7 @@ query {
 }
 ```
 
-3. Change the status of one lift
+3. Change the status of one trail
 ```
 mutation {
   setTrailStatus(id: "blue-bird" status: CLOSED) {
@@ -120,11 +122,14 @@ mutation {
 }
 ```
 
+https://slides.com/moonhighway/schema-definition-language
+#### GraphQL is a spec that describes:
+- A Query Language
+- A Schema Definition Language
 
-
-
-
-
-
-
-
+##### GraphQL Scalar Types
+Int
+Float
+String
+Boolean
+ID
