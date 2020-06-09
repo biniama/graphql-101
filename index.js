@@ -4,14 +4,26 @@ const trails = require('./data/trails.json');
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
+    type Lift {
+        id: ID!
+        name: String!
+        capacity: Int!
+        night: Boolean!
+        elevationGain: Int!
+    }
+
     type Query {
-        hello: String!
+        allLifts: [Lift!]!
+        liftCount: Int!
+        findLiftById(id: ID!): Lift!
     }
 `
 
 const resolvers = {
     Query: {
-        hello: () => 'hello world'
+        allLifts: () => lifts,
+        liftCount: () => lifts.length,
+        findLiftById: (parent, args) => lifts.find(lift => args.id === lift.id)
     }
 }
 
